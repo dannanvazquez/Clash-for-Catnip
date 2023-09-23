@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Move() {
+        //int count = rb.Cast(moveDirection, out RaycastHit2D castCollisions);
+
         rb.velocity = moveDirection * moveSpeed;
         playerCamera.transform.position = transform.position + new Vector3(0, 0, -10f);
 
