@@ -1688,7 +1688,7 @@ MonoBehaviour:
   healthBarTransform: {fileID: 142651820}
   healthMask: {fileID: 1732091584}
   healthText: {fileID: 0}
-  maxHealth: 100
+  maxHealth: 200
 --- !u!195 &359885416
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1723,7 +1723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5650b3e440af21488d76dfcb1d96420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 25
   hitCooldown: 2
 --- !u!1 &450072003
 GameObject:
@@ -5223,4 +5223,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 6207654670276707441, guid: ff46ba48587693d44a57508ea0451369, type: 3}
   firePoint: {fileID: 555026725}
-  fireForce: 20
+  fireForce: 25
+  fireRate: 0.25
+  damage: 5

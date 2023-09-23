@@ -5,6 +5,8 @@ public class Bullet : MonoBehaviour {
     [Header("References")]
     [SerializeField] private GameObject impactEffectPrefab;
 
+    [HideInInspector] public int damage;
+
     private Rigidbody2D rb;
 
     private void Awake() {
@@ -18,7 +20,7 @@ public class Bullet : MonoBehaviour {
                 break;
             case "Enemy":
                 if (collision.TryGetComponent(out Health health)) {
-                    health.TakeDamage(20);
+                    health.TakeDamage(damage);
                 }
                 Impact();
                 break;
