@@ -17,7 +17,9 @@ public class Bullet : MonoBehaviour {
                 Impact();
                 break;
             case "Enemy":
-                // TODO: Deal damage to enemy
+                if (collision.TryGetComponent(out Health health)) {
+                    health.TakeDamage(20);
+                }
                 Impact();
                 break;
         }
