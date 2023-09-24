@@ -32,6 +32,8 @@ public class MeleeEnemy : MonoBehaviour {
     }
 
     private void Update() {
+        if (playerTransform == null) return;
+
         agent.destination = playerTransform.position;
 
         // Rotate enemy to follow player

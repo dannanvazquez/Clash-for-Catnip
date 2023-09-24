@@ -16,7 +16,7 @@ public class LeaderboardCanvas : MonoBehaviour {
         LootLockerSDKManager.GetScoreList("Catnip", topScoresCount, 0, (response) => {
             if (response.statusCode == 200) {
                 if (response.items.Length > 0) {
-                    for (int i = 0; i < topScoresCount; i++) {
+                    for (int i = 0; i < response.items.Length; i++) {
                         GameObject score = Instantiate(scorePanelPrefab, scoresContainerTransform);
                         score.GetComponent<ScorePanel>().SetScoreInfo(response.items[i].player.name, response.items[i].score);
                     }

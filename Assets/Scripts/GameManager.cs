@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private TMP_Text enemiesRemainingText;
     [SerializeField] private TMP_Text catnipText;
     [SerializeField] private GameObject catnipPrefab;
+    [SerializeField] private GameOverCanvas gameOverCanvas;
 
     [Header("Settings")]
     [Tooltip("The amount of seconds before starting the game.")]
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour {
 
     public int wave { get; private set; } = 0;
     [HideInInspector] public int enemyCount = 0;
-    private int catnip = 0;
+    public int catnip { get; private set; } = 0;
 
     public static GameManager Instance { get; private set; }
 
@@ -96,5 +97,9 @@ public class GameManager : MonoBehaviour {
         catnip++;
         catnipText.text = $"Catnip: {catnip}";
         player.GetComponent<Health>().Heal(healAmount);
+    }
+
+    public void GameOver() {
+        gameOverCanvas.EnableCanvas();
     }
 }

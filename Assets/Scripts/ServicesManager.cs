@@ -21,6 +21,8 @@ public class ServicesManager : MonoBehaviour {
                 Debug.Log("Successfully started LootLocker session.");
                 loginInfoText.text = "Connected to services successfully.";
 
+                PlayerPrefs.SetInt("PlayerID", response.player_id);
+
                 leaderboardCanvas.InitializeTopScores();
             } else {
                 Debug.Log("Error starting LootLocker session.");

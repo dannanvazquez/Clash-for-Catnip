@@ -57,8 +57,13 @@ public class Health : MonoBehaviour {
     }
 
     private void Death() {
-        if (gameObject.CompareTag("Enemy")) {
-            GameManager.Instance.EnemyKilled(transform.position);
+        switch (gameObject.tag) {
+            case "Enemy":
+                GameManager.Instance.EnemyKilled(transform.position);
+                break;
+            case "Player":
+                GameManager.Instance.GameOver();
+                break;
         }
 
         Destroy(gameObject);
