@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour {
     [Header("References")]
-    [SerializeField] private GameObject player;
+    public GameObject player;
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private TMP_Text waveText;
     [SerializeField] private TMP_Text enemiesRemainingText;

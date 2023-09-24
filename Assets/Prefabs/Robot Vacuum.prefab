@@ -169,7 +169,7 @@ MonoBehaviour:
   healthBarTransform: {fileID: 6585321474394014107}
   healthMask: {fileID: 6585321475832344311}
   healthText: {fileID: 0}
-  healthBase: 0
+  healthBase: 30
   healthIncrease: 15
 --- !u!212 &6585321474460097107
 SpriteRenderer:

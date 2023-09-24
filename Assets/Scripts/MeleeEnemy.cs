@@ -22,7 +22,7 @@ public class MeleeEnemy : MonoBehaviour {
     private bool canHit = true;
 
     private void Awake() {
-        playerTransform = FindFirstObjectByType<PlayerController>().transform;
+        playerTransform = GameManager.Instance.player.transform;
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -32,11 +32,6 @@ public class MeleeEnemy : MonoBehaviour {
     }
 
     private void Update() {
-        if (playerTransform == null) {
-            agent.isStopped = true;
-            return;
-        }
-
         agent.destination = playerTransform.position;
 
         // Rotate enemy to follow player

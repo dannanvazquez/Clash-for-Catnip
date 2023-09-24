@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour {
     [SerializeField] private GameObject impactEffectPrefab;
 
     [HideInInspector] public int damage;
+    [HideInInspector] public bool belongsToPlayer;
 
     private Rigidbody2D rb;
 
@@ -19,8 +20,18 @@ public class Bullet : MonoBehaviour {
                 Impact();
                 break;
             case "Enemy":
-                if (collision.TryGetComponent(out Health health)) {
-                    health.TakeDamage(damage);
+                if (!belongsToPlayer) return;
+
+                if (collision.TryGetComponent(out Health enemyHealth)) {
+                    enemyHealth.TakeDamage(damage);
+                }
+                Impact();
+                break;
+            case "Player":
+                if (belongsToPlayer) return;
+
+                if (collision.TryGetComponent(out Health playerHealth)) {
+                    playerHealth.TakeDamage(damage);
                 }
                 Impact();
                 break;
