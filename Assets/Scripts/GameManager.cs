@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour {
     [Header("References")]
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject[] enemyPrefabs;
 
     [Header("Settings")]
     [Tooltip("The amount of seconds before starting the game.")]
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour {
         while (this) {
             Vector2 randomPoint = RandomPointInAnnulus(player.transform.position, minimumEnemySpawnDistance, maximumEnemySpawnDistance);
             if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 1f, NavMesh.AllAreas)) {
-                Instantiate(enemyPrefab, hit.position, Quaternion.identity);
+                Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], hit.position, Quaternion.identity);
                 break;
             }
 
