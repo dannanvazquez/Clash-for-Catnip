@@ -3,12 +3,18 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyController : MonoBehaviour {
+public class MeleeEnemy : MonoBehaviour {
     [Header("Settings")]
-    [Tooltip("The amount of damage this enemy will do against the player per hit.")]
-    [SerializeField] private int damage;
+    [Tooltip("The base amount of damage this enemy will do against the player per hit.")]
+    [SerializeField] private int damageBase;
+    [Tooltip("The increase amount of damage this enemy will gain per wave.")]
+    [SerializeField] private int damageIncrease;
     [Tooltip("The amount of seconds before this enemy can hit again.")]
     [SerializeField] private int hitCooldown;
+    [Tooltip("The increase amount of speed this enemy will gain per wave.")]
+    [SerializeField] private float speedIncrease;
+
+    private int damage;
 
     private Transform playerTransform;
     private NavMeshAgent agent;
@@ -20,6 +26,9 @@ public class EnemyController : MonoBehaviour {
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
+
+        damage = damageBase + (damageIncrease * GameManager.Instance.wave);
+        agent.speed += speedIncrease * GameManager.Instance.wave;
     }
 
     private void Update() {
@@ -48,5 +57,9 @@ public class EnemyController : MonoBehaviour {
         canHit = false;
         yield return new WaitForSeconds(hitCooldown);
         canHit = true;
+    }
+
+    private void OnDestroy() {
+        GameManager.Instance.enemyCount--;
     }
 }

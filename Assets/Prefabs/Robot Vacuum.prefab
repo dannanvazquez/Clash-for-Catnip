@@ -110,7 +110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6585321474460097106}
-  - component: {fileID: 6585321474460097118}
+  - component: {fileID: 7405243071115386959}
   - component: {fileID: 6585321474460097104}
   - component: {fileID: 6585321474460097107}
   - component: {fileID: 6585321474460097105}
@@ -138,7 +138,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6585321474460097118
+--- !u!114 &7405243071115386959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,11 +147,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6585321474460097109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5650b3e440af21488d76dfcb1d96420, type: 3}
+  m_Script: {fileID: 11500000, guid: 0adf373dc27e38143a4aa77900e2b4f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 25
-  hitCooldown: 2
+  damageBase: 30
+  damageIncrease: 0
+  hitCooldown: 1
+  speedIncrease: 0.25
 --- !u!114 &6585321474460097104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +169,8 @@ MonoBehaviour:
   healthBarTransform: {fileID: 6585321474394014107}
   healthMask: {fileID: 6585321475832344311}
   healthText: {fileID: 0}
-  maxHealth: 150
+  maxHealth: 50
+  healthIncrease: 15
 --- !u!212 &6585321474460097107
 SpriteRenderer:
   m_ObjectHideFlags: 0

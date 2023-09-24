@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         ProcessInputs();
+        playerCamera.transform.position = transform.position + new Vector3(0, 0, -10f);
     }
 
     private void FixedUpdate() {
@@ -41,10 +42,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Move() {
-        //int count = rb.Cast(moveDirection, out RaycastHit2D castCollisions);
-
         rb.velocity = moveDirection * moveSpeed;
-        playerCamera.transform.position = transform.position + new Vector3(0, 0, -10f);
 
         // Rotate player to follow mouse
         Vector2 aimDirection = mousePosition - rb.position;

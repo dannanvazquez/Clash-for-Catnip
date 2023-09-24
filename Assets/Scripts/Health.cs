@@ -10,12 +10,16 @@ public class Health : MonoBehaviour {
     [SerializeField] private TMP_Text healthText;
 
     [Header("Settings")]
-    [Tooltip("The maximum amount of health this entity has.")]
-    [SerializeField] private int maxHealth;
+    [Tooltip("The base amount of health this entity will have.")]
+    [SerializeField] private int healthBase;
+    [Tooltip("The increase amount of health this entity will gain per wave.")]
+    [SerializeField] private int healthIncrease;
 
     public int currentHealth { get; private set; }
+    private int maxHealth;
 
     private void Awake() {
+        maxHealth = healthBase + healthIncrease * GameManager.Instance.wave;
         currentHealth = maxHealth;
     }
 

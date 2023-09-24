@@ -14835,9 +14835,11 @@ MonoBehaviour:
   - {fileID: 6585321474460097109, guid: 4f50c424b19264f45ba6bb6c86bdddfa, type: 3}
   - {fileID: 6585321474460097109, guid: 38234b4aed53cda419e937036ed4d4cf, type: 3}
   startTime: 3
-  enemySpawnTimeInterval: 10
   minimumEnemySpawnDistance: 10
   maximumEnemySpawnDistance: 12
+  baseEnemySpawnCount: 3
+  ratioEnemySpawnCount: 0.25
+  enemyCount: 0
 --- !u!1 &450072003
 GameObject:
   m_ObjectHideFlags: 0
@@ -32428,7 +32430,8 @@ MonoBehaviour:
   healthBarTransform: {fileID: 957109440}
   healthMask: {fileID: 1929005927}
   healthText: {fileID: 339670283}
-  maxHealth: 100
+  healthBase: 100
+  healthIncrease: 0
 --- !u!212 &1337876247
 SpriteRenderer:
   m_ObjectHideFlags: 0
