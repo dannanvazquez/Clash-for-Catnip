@@ -24,7 +24,6 @@ public class RangedEnemy : MonoBehaviour {
     }
 
     private void Update() {
-
         // TODO: Check if enemy has a clear line of sight to hit. No obstacles right now so it doesn't matter at the moment.
         float distance = Vector3.Distance(transform.position, playerTransform.position);
         if ((distance > enemyWeapon.shootRange && !enemyWeapon.isInShootingState) || (distance > enemyWeapon.deaggroRange && enemyWeapon.isInShootingState)) {
