@@ -18,7 +18,7 @@ public class Health : MonoBehaviour {
     public int currentHealth { get; private set; }
     private int maxHealth;
 
-    private void Awake() {
+    private void Start() {
         maxHealth = healthBase + healthIncrease * GameManager.Instance.wave;
         currentHealth = maxHealth;
     }
