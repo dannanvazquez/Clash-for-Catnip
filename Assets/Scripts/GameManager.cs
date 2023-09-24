@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private TMP_Text waveText;
     [SerializeField] private TMP_Text enemiesRemainingText;
+    [SerializeField] private TMP_Text catnipText;
+    [SerializeField] private GameObject catnipPrefab;
 
     [Header("Settings")]
     [Tooltip("The amount of seconds before starting the game.")]
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour {
 
     public int wave { get; private set; } = 0;
     [HideInInspector] public int enemyCount = 0;
+    private int catnip = 0;
 
     public static GameManager Instance { get; private set; }
 
@@ -54,7 +57,7 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < baseEnemySpawnCount + (ratioEnemySpawnCount * wave); i++) {
             while (this) {
                 Vector2 randomPoint = RandomPointInAnnulus(player.transform.position, minimumEnemySpawnDistance, maximumEnemySpawnDistance);
-                if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 1f, NavMesh.AllAreas)) {
+                if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 0.1f, NavMesh.AllAreas)) {
                     Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], hit.position, Quaternion.identity);
                     break;
                 }
@@ -82,8 +85,16 @@ public class GameManager : MonoBehaviour {
         return point;
     }
 
-    public void EnemyKilled() {
+    public void EnemyKilled(Vector3 enemyDeathPosition) {
         enemyCount--;
         enemiesRemainingText.text = $"Enemies Remaining: {enemyCount}";
+        GameObject catnip = Instantiate(catnipPrefab, enemyDeathPosition, Quaternion.identity);
+        catnip.GetComponent<BobbingEffect>().canBob = true;
+    }
+
+    public void PickedUpCatnip(int healAmount) {
+        catnip++;
+        catnipText.text = $"Catnip: {catnip}";
+        player.GetComponent<Health>().Heal(healAmount);
     }
 }

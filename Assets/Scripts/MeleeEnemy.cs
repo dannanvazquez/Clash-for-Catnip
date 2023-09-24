@@ -58,8 +58,4 @@ public class MeleeEnemy : MonoBehaviour {
         yield return new WaitForSeconds(hitCooldown);
         canHit = true;
     }
-
-    private void OnDestroy() {
-        GameManager.Instance.EnemyKilled();
-    }
 }

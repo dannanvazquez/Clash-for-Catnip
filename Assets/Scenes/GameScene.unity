@@ -14637,6 +14637,8 @@ MonoBehaviour:
   - {fileID: 6585321474460097109, guid: 38234b4aed53cda419e937036ed4d4cf, type: 3}
   waveText: {fileID: 162035238}
   enemiesRemainingText: {fileID: 1165121340}
+  catnipText: {fileID: 1958607262}
+  catnipPrefab: {fileID: 4242130468098172088, guid: ccd54f287ed6f0143b2c0b21ea2c8424, type: 3}
   startTime: 1
   minimumEnemySpawnDistance: 10
   maximumEnemySpawnDistance: 12
@@ -31943,6 +31945,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1958607262 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8624240935978453151, guid: 94ca210841800fb41b8afb09d03008d5, type: 3}
+  m_PrefabInstance: {fileID: 3103989791471869489}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2056253831
 GameObject:
   m_ObjectHideFlags: 0
@@ -32119,6 +32132,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 9085213119130063480, guid: 838e71f8d6080564087f0dee9f4280d2, type: 3}
+      propertyPath: moveSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 9085213119130063480, guid: 838e71f8d6080564087f0dee9f4280d2, type: 3}
       propertyPath: playerCamera
       value: 

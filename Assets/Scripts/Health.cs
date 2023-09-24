@@ -39,6 +39,12 @@ public class Health : MonoBehaviour {
 
     }
 
+    public void Heal(int healAmount) {
+        currentHealth += healAmount;
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        UpdateHealthBar();
+    }
+
     private void UpdateHealthBar() {
         if (healthMask) {
             float paddingZ = 960 - (960 * ((float)currentHealth / (float)maxHealth));
@@ -51,6 +57,10 @@ public class Health : MonoBehaviour {
     }
 
     private void Death() {
+        if (gameObject.CompareTag("Enemy")) {
+            GameManager.Instance.EnemyKilled(transform.position);
+        }
+
         Destroy(gameObject);
     }
 }

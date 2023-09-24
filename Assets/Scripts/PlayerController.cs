@@ -22,11 +22,11 @@ public class PlayerController : MonoBehaviour {
 
     private void Update() {
         ProcessInputs();
-        playerCamera.transform.position = transform.position + new Vector3(0, 0, -10f);
     }
 
     private void FixedUpdate() {
         Move();
+        playerCamera.transform.position = transform.position + new Vector3(0, 0, -10f);
     }
 
     private void ProcessInputs() {
