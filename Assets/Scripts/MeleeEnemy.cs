@@ -60,6 +60,6 @@ public class MeleeEnemy : MonoBehaviour {
     }
 
     private void OnDestroy() {
-        GameManager.Instance.enemyCount--;
+        GameManager.Instance.EnemyKilled();
     }
 }

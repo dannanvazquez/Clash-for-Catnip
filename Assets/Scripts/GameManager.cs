@@ -1,11 +1,15 @@
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour {
     [Header("References")]
+    [SerializeField] private GameObject player;
     [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private TMP_Text waveText;
+    [SerializeField] private TMP_Text enemiesRemainingText;
 
     [Header("Settings")]
     [Tooltip("The amount of seconds before starting the game.")]
@@ -22,8 +26,6 @@ public class GameManager : MonoBehaviour {
     public int wave { get; private set; } = 0;
     [HideInInspector] public int enemyCount = 0;
 
-    private GameObject player;
-
     public static GameManager Instance { get; private set; }
 
     private void Awake() {
@@ -33,8 +35,6 @@ public class GameManager : MonoBehaviour {
         } else {
             Instance = this;
         }
-
-        player = FindFirstObjectByType<PlayerController>().gameObject;
     }
 
     private void Start() {
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator SpawnEnemy() {
         wave++;
+        waveText.text = $"Wave: {wave}";
 
         for (int i = 0; i < baseEnemySpawnCount + (ratioEnemySpawnCount * wave); i++) {
             while (this) {
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour {
                 yield return null;
             }
             enemyCount++;
+            enemiesRemainingText.text = $"Enemies Remaining: {enemyCount}";
         }
 
         while (this) {
@@ -80,4 +82,8 @@ public class GameManager : MonoBehaviour {
         return point;
     }
 
+    public void EnemyKilled() {
+        enemyCount--;
+        enemiesRemainingText.text = $"Enemies Remaining: {enemyCount}";
+    }
 }
