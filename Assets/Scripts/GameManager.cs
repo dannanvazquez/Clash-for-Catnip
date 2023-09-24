@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour {
     [Header("References")]
@@ -21,10 +23,29 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Start() {
-        InvokeRepeating(nameof(SpawnEnemy), startTime, enemySpawnTimeInterval);
+        StartCoroutine(StartGame());
     }
-    private void SpawnEnemy() {
-        Instantiate(enemyPrefab, RandomPointInAnnulus(player.transform.position, minimumEnemySpawnDistance, maximumEnemySpawnDistance), Quaternion.identity);
+
+    private IEnumerator StartGame() {
+        yield return new WaitForSeconds(startTime);
+
+        StartCoroutine(SpawnEnemy());
+    }
+
+    private IEnumerator SpawnEnemy() {
+        while (this) {
+            Vector2 randomPoint = RandomPointInAnnulus(player.transform.position, minimumEnemySpawnDistance, maximumEnemySpawnDistance);
+            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 1f, NavMesh.AllAreas)) {
+                Instantiate(enemyPrefab, hit.position, Quaternion.identity);
+                break;
+            }
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(enemySpawnTimeInterval);
+
+        StartCoroutine(SpawnEnemy());
     }
 
     public Vector2 RandomPointInAnnulus(Vector2 origin, float minRadius, float maxRadius) {

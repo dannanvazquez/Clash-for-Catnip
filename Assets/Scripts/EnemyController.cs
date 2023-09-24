@@ -23,6 +23,11 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void Update() {
+        if (playerTransform == null) {
+            agent.isStopped = true;
+            return;
+        }
+
         agent.destination = playerTransform.position;
 
         // Rotate enemy to follow player

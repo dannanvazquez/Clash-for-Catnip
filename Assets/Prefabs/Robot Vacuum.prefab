@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 6585321474460097105}
   - component: {fileID: 6585321474460097119}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Robot Vacuum
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   healthBarTransform: {fileID: 6585321474394014107}
   healthMask: {fileID: 6585321475832344311}
   healthText: {fileID: 0}
-  maxHealth: 200
+  maxHealth: 150
 --- !u!212 &6585321474460097107
 SpriteRenderer:
   m_ObjectHideFlags: 0
