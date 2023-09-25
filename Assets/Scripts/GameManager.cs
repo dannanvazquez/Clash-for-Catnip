@@ -1,8 +1,8 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+
 
 public class GameManager : MonoBehaviour {
     [Header("References")]
@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private TMP_Text catnipText;
     [SerializeField] private GameObject catnipPrefab;
     [SerializeField] private GameOverCanvas gameOverCanvas;
+    [SerializeField] private AudioSource catnipAudioSource;
 
     [Header("Settings")]
     [Tooltip("The amount of seconds before starting the game.")]
@@ -39,6 +40,8 @@ public class GameManager : MonoBehaviour {
         } else {
             Instance = this;
         }
+
+        if (MusicManager.Instance) MusicManager.Instance.StartGameMusic();
     }
 
     private void Start() {
@@ -97,6 +100,7 @@ public class GameManager : MonoBehaviour {
         catnip++;
         catnipText.text = $"Catnip: {catnip}";
         player.GetComponent<Health>().Heal(healAmount);
+        catnipAudioSource.Play();
     }
 
     public void GameOver() {

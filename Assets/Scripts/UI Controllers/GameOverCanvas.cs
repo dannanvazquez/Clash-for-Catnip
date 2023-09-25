@@ -29,6 +29,8 @@ public class GameOverCanvas : MonoBehaviour {
         }
 
         GetComponent<Canvas>().enabled = true;
+
+        if (MusicManager.Instance) MusicManager.Instance.StartGameOverMusic();
     }
 
     public void RestartGame() {

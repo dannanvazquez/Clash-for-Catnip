@@ -1,10 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Weapon : MonoBehaviour {
     [Header("References")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private AudioClip[] fireClips;
+
+    private AudioSource audioSource;
 
     [Header("Settings")]
     [Tooltip("The force applied to the bullet shooting outwards.")]
@@ -16,6 +20,10 @@ public class Weapon : MonoBehaviour {
 
     private bool canShoot = true;
 
+    private void Awake() {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Fire() {
         if (!canShoot) return;
 
@@ -23,6 +31,9 @@ public class Weapon : MonoBehaviour {
         projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
         projectile.GetComponent<Bullet>().damage = damage;
         projectile.GetComponent<Bullet>().belongsToPlayer = true;
+
+        audioSource.clip = fireClips[Random.Range(0,fireClips.Length)];
+        audioSource.Play();
 
         StartCoroutine(FireCooldown());
     }

@@ -1,11 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class EnemyWeapon : MonoBehaviour {
     [Header("References")]
     [SerializeField] private RangedEnemy rangedEnemy;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private AudioClip[] fireClips;
+
+    private AudioSource audioSource;
 
     [Header("Settings")]
     [Tooltip("The force applied to the bullet shooting outwards.")]
@@ -27,6 +31,8 @@ public class EnemyWeapon : MonoBehaviour {
     [HideInInspector] public bool isInShootingState = false;
 
     private void Awake() {
+        audioSource = GetComponent<AudioSource>();
+
         damage = damageBase + (damageIncrease * GameManager.Instance.wave);
     }
 
@@ -39,6 +45,9 @@ public class EnemyWeapon : MonoBehaviour {
         projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
         projectile.GetComponent<Bullet>().damage = damage;
         projectile.GetComponent<Bullet>().belongsToPlayer = false;
+
+        audioSource.clip = fireClips[Random.Range(0, fireClips.Length)];
+        audioSource.Play();
 
         StartCoroutine(FireCooldown());
     }
