@@ -51,7 +51,7 @@ public class GameOverCanvas : MonoBehaviour {
                 }
             } else {
                 Debug.Log("Failed to get player info: " + response.errorData.message);
-                infoText.text = "Failed to get player info: "+response.errorData.message;
+                infoText.text = "Failed to get player info. Are you connected to services?";
             }
         });
     }
@@ -64,7 +64,7 @@ public class GameOverCanvas : MonoBehaviour {
                 SendScoreToLeaderboard(response.name);
             } else {
                 Debug.Log("Failed to set player name: " + response.errorData.message);
-                infoText.text = "Failed to set player name: "+response.errorData.message;
+                infoText.text = "Failed to set player name. Maybe the name is already taken? Try another name.";
             }
         });
     }
@@ -76,7 +76,7 @@ public class GameOverCanvas : MonoBehaviour {
                 infoText.text = $"Score has been submitted as {playerName}!";
             } else {
                 Debug.Log("Failed to submit score: " + response.errorData.message);
-                infoText.text = "Failed to submit score: " + response.errorData.message;
+                infoText.text = "Failed to submit score.";
             }
         });
     }

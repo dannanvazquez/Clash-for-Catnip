@@ -168,6 +168,8 @@ MonoBehaviour:
   healthBarTransform: {fileID: 6585321474394014107}
   healthMask: {fileID: 6585321475832344311}
   healthText: {fileID: 0}
+  hitAudioSource: {fileID: 0}
+  hitClips: []
   healthBase: 5
   healthIncrease: 1
 --- !u!212 &6585321474460097107
