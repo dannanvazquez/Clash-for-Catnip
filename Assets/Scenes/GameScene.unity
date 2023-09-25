@@ -14797,6 +14797,7 @@ MonoBehaviour:
   - {fileID: 6585321474460097109, guid: 4f50c424b19264f45ba6bb6c86bdddfa, type: 3}
   - {fileID: 6585321474460097109, guid: 38234b4aed53cda419e937036ed4d4cf, type: 3}
   - {fileID: 6585321474460097109, guid: 528100403fdd8da4484a978de6e0272d, type: 3}
+  - {fileID: 6585321474460097109, guid: 011bddd392d7a234280601a08ebaeeb0, type: 3}
   waveText: {fileID: 162035238}
   enemiesRemainingText: {fileID: 1165121340}
   catnipText: {fileID: 1958607262}
@@ -14807,7 +14808,7 @@ MonoBehaviour:
   minimumEnemySpawnDistance: 15
   maximumEnemySpawnDistance: 20
   baseEnemySpawnCount: 3
-  ratioEnemySpawnCount: 0.25
+  ratioEnemySpawnCount: 0.5
   enemyCount: 0
 --- !u!1 &519420028
 GameObject:

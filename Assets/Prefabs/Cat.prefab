@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 6585321474460097119}
   - component: {fileID: 5043922426691434470}
   m_Layer: 0
-  m_Name: Dog
+  m_Name: Cat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   healthBarTransform: {fileID: 6585321474394014107}
   healthMask: {fileID: 6585321475832344311}
   healthText: {fileID: 0}
-  healthBase: 10
+  healthBase: 5
   healthIncrease: 1
 --- !u!212 &6585321474460097107
 SpriteRenderer:
@@ -211,7 +211,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 98
-  m_Sprite: {fileID: 21300000, guid: 138d89fd788ef364e93bb3efc66e0bf1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f2073b27fb60c342a03a923739a175d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -232,7 +232,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3
+  m_Speed: 4
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -557,8 +557,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 544dc9dc48bcbe6419fbe64401bfebba, type: 3}
   - {fileID: 8300000, guid: 5996a3c5435c85745830463903d43b93, type: 3}
   fireForce: 25
-  fireRate: 0.5
-  damageBase: 10
+  fireRate: 0.25
+  damageBase: 5
   damageIncrease: 0
   shootRange: 4
   deaggroRange: 8

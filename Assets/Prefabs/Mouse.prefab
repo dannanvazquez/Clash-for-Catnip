@@ -153,7 +153,7 @@ MonoBehaviour:
   damageBase: 15
   damageIncrease: 0
   hitCooldown: 1
-  speedIncrease: 0.1
+  speedIncrease: 0.05
 --- !u!114 &6585321474460097104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +170,7 @@ MonoBehaviour:
   healthMask: {fileID: 6585321475832344311}
   healthText: {fileID: 0}
   healthBase: 5
-  healthIncrease: 10
+  healthIncrease: 1
 --- !u!212 &6585321474460097107
 SpriteRenderer:
   m_ObjectHideFlags: 0
