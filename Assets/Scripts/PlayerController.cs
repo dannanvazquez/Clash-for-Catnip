@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1") && Time.timeScale != 0) {
             weapon.Fire();
         }
 

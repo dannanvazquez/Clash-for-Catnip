@@ -43,7 +43,7 @@ public class Weapon : MonoBehaviour {
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
 
-        if (Input.GetButton("Fire1")) {
+        if (Input.GetButton("Fire1") && Time.timeScale != 0) {
             Fire();
         }
     }

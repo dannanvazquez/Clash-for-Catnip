@@ -8,7 +8,7 @@ public class MusicManager : MonoBehaviour {
     [SerializeField] private AudioClip gameMusic;
     [SerializeField] private AudioClip gameOverMusic;
 
-    private AudioSource audioSource;
+    [HideInInspector] public AudioSource audioSource;
 
     public static MusicManager Instance { get; private set; }
 

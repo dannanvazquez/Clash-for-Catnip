@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     [Header("References")]
@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private GameObject catnipPrefab;
     [SerializeField] private GameOverCanvas gameOverCanvas;
     [SerializeField] private AudioSource catnipAudioSource;
+    [SerializeField] private Canvas pauseCanvas;
 
     [Header("Settings")]
     [Tooltip("The amount of seconds before starting the game.")]
@@ -46,6 +47,26 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         StartCoroutine(StartGame());
+    }
+
+    private void Update() {
+        if (gameOverCanvas.GetComponent<Canvas>().enabled == false) {
+            if (Input.GetButtonDown("Cancel")) {
+                TogglePause();
+            }
+        }
+    }
+
+    public void TogglePause() {
+        if (Time.timeScale == 0) {
+            Time.timeScale = 1;
+            pauseCanvas.enabled = false;
+            MusicManager.Instance.audioSource.UnPause();
+        } else {
+            Time.timeScale = 0;
+            pauseCanvas.enabled = true;
+            MusicManager.Instance.audioSource.Pause();
+        }
     }
 
     private IEnumerator StartGame() {
