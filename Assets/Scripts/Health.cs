@@ -8,6 +8,8 @@ public class Health : MonoBehaviour {
     [SerializeField] private Transform healthBarTransform;
     [SerializeField] private RectMask2D healthMask;
     [SerializeField] private TMP_Text healthText;
+    [SerializeField] private AudioSource hitAudioSource;
+    [SerializeField] private AudioClip[] hitClips;
 
     [Header("Settings")]
     [Tooltip("The base amount of health this entity will have.")]
@@ -28,6 +30,11 @@ public class Health : MonoBehaviour {
     }
 
     public void TakeDamage(int damage) {
+        if (hitAudioSource != null && hitClips.Length > 0) {
+            hitAudioSource.clip = hitClips[Random.Range(0, hitClips.Length)];
+            hitAudioSource.Play();
+        }
+
         if (currentHealth - damage <= 0) {
             currentHealth = 0;
             UpdateHealthBar();
