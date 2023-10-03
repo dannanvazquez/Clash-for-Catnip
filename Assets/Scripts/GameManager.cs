@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private GameOverCanvas gameOverCanvas;
     [SerializeField] private AudioSource catnipAudioSource;
     [SerializeField] private Canvas pauseCanvas;
+    [SerializeField] private Canvas joystickCanvas;
 
     [Header("Settings")]
     [Tooltip("The amount of seconds before starting the game.")]
@@ -34,6 +35,16 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager Instance { get; private set; }
 
+    [System.Runtime.InteropServices.DllImport("__Internal")]
+    private static extern bool IsMobile();
+
+    public bool isMobile() {
+#if !UNITY_EDITOR && UNITY_WEBGL
+        return IsMobile();
+#endif
+        return false;
+    }
+
     private void Awake() {
         // If there is an instance, and it's not me, delete myself.
         if (Instance != null && Instance != this) {
@@ -46,6 +57,10 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Start() {
+        if (isMobile()) {
+            joystickCanvas.enabled = true;
+        }
+
         StartCoroutine(StartGame());
     }
 
