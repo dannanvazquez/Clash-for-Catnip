@@ -32435,18 +32435,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8497034714242452330, guid: 838e71f8d6080564087f0dee9f4280d2, type: 3}
-      propertyPath: m_Volume
-      value: 0.3
-      objectReference: {fileID: 0}
     - target: {fileID: 9085213118900296105, guid: 838e71f8d6080564087f0dee9f4280d2, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 9085213119130063480, guid: 838e71f8d6080564087f0dee9f4280d2, type: 3}
-      propertyPath: joystick
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 9085213119130063480, guid: 838e71f8d6080564087f0dee9f4280d2, type: 3}
       propertyPath: playerCamera
       value: 

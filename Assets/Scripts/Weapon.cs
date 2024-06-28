@@ -24,7 +24,11 @@ public class Weapon : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void Fire() {
+    private void Update() {
+        Fire();
+    }
+
+    private void Fire() {
         if (!canShoot) return;
 
         GameObject projectile = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
@@ -42,9 +46,5 @@ public class Weapon : MonoBehaviour {
         canShoot = false;
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
-
-        if (Input.GetButton("Fire1") && Time.timeScale != 0) {
-            Fire();
-        }
     }
 }

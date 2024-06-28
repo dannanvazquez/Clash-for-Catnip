@@ -671,8 +671,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  weapon: {fileID: 9085213120005560179}
+  movementJoystick: {fileID: 0}
+  shootingJoystick: {fileID: 0}
   moveSpeed: 6
+  autoAimRange: 6
 --- !u!114 &9085213119130063483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -981,7 +983,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
