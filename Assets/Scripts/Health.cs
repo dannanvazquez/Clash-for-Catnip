@@ -14,15 +14,11 @@ public class Health : MonoBehaviour {
     [Header("Settings")]
     [Tooltip("The base amount of health this entity will have.")]
     [SerializeField] private int healthBase;
-    [Tooltip("The increase amount of health this entity will gain per wave.")]
-    [SerializeField] private int healthIncrease;
 
     public int currentHealth { get; private set; }
-    private int maxHealth;
 
     private void Start() {
-        maxHealth = healthBase + healthIncrease * GameManager.Instance.wave;
-        currentHealth = maxHealth;
+        currentHealth = healthBase;
     }
 
     private void Update() {
@@ -48,18 +44,18 @@ public class Health : MonoBehaviour {
 
     public void Heal(int healAmount) {
         currentHealth += healAmount;
-        if (currentHealth > maxHealth) currentHealth = maxHealth;
+        if (currentHealth > healthBase) currentHealth = healthBase;
         UpdateHealthBar();
     }
 
     private void UpdateHealthBar() {
         if (healthMask) {
-            float paddingZ = 960 - (960 * ((float)currentHealth / (float)maxHealth));
+            float paddingZ = 960 - (960 * ((float)currentHealth / (float)healthBase));
             healthMask.padding = new Vector4(0, 0, paddingZ, 0);
         }
 
         if (healthText) {
-            healthText.text = $"{currentHealth} / {maxHealth}";
+            healthText.text = $"{currentHealth} / {healthBase}";
         }
     }
 

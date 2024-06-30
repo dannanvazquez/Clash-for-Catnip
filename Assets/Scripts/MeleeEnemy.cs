@@ -7,14 +7,10 @@ public class MeleeEnemy : MonoBehaviour {
     [Header("Settings")]
     [Tooltip("The base amount of damage this enemy will do against the player per hit.")]
     [SerializeField] private int damageBase;
-    [Tooltip("The increase amount of damage this enemy will gain per wave.")]
-    [SerializeField] private int damageIncrease;
     [Tooltip("The amount of seconds before this enemy can hit again.")]
     [SerializeField] private int hitCooldown;
     [Tooltip("The increase amount of speed this enemy will gain per wave.")]
     [SerializeField] private float speedIncrease;
-
-    private int damage;
 
     private Transform playerTransform;
     private NavMeshAgent agent;
@@ -26,9 +22,6 @@ public class MeleeEnemy : MonoBehaviour {
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
-
-        damage = damageBase + (damageIncrease * GameManager.Instance.wave);
-        agent.speed += speedIncrease * GameManager.Instance.wave;
     }
 
     private void Update() {
@@ -46,7 +39,7 @@ public class MeleeEnemy : MonoBehaviour {
     private void OnCollisionStay2D(Collision2D collision) {
         if (canHit && collision.gameObject.CompareTag("Player") && collision.gameObject.TryGetComponent(out Health health)) {
             StartCoroutine(HitCooldown());
-            health.TakeDamage(damage);
+            health.TakeDamage(damageBase);
         }
     }
 

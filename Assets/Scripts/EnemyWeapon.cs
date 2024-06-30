@@ -18,22 +18,17 @@ public class EnemyWeapon : MonoBehaviour {
     [SerializeField] private float fireRate;
     [Tooltip("The base amount of damage this enemy will do against the player per hit.")]
     [SerializeField] private int damageBase;
-    [Tooltip("The increase amount of damage this enemy will gain per wave.")]
-    [SerializeField] private int damageIncrease;
     [Tooltip("The range at which the enemy will shoot at from the player.")]
     public int shootRange;
     [Tooltip("The range at which the enemy will start walking towards the player after shooting.")]
     public int deaggroRange;
 
-    private int damage;
     private bool canShoot = true;
 
     [HideInInspector] public bool isInShootingState = false;
 
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
-
-        damage = damageBase + (damageIncrease * GameManager.Instance.wave);
     }
 
     public void Fire() {
@@ -43,7 +38,7 @@ public class EnemyWeapon : MonoBehaviour {
 
         GameObject projectile = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
-        projectile.GetComponent<Bullet>().damage = damage;
+        projectile.GetComponent<Bullet>().damage = damageBase;
         projectile.GetComponent<Bullet>().belongsToPlayer = false;
 
         audioSource.clip = fireClips[Random.Range(0, fireClips.Length)];

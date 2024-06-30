@@ -7,10 +7,6 @@ public class RangedEnemy : MonoBehaviour {
     [Header("References")]
     [SerializeField] private EnemyWeapon enemyWeapon;
 
-    [Header("Settings")]
-    [Tooltip("The increase amount of speed this enemy will gain per wave.")]
-    [SerializeField] private float speedIncrease;
-
     private Transform playerTransform;
     private NavMeshAgent agent;
 
@@ -19,8 +15,6 @@ public class RangedEnemy : MonoBehaviour {
 
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
-
-        agent.speed += speedIncrease * GameManager.Instance.wave;
     }
 
     private void Update() {
