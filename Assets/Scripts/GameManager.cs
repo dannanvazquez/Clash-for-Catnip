@@ -1,13 +1,12 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     [Header("References")]
     public GameObject player;
-    [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private TMP_Text waveText;
     [SerializeField] private TMP_Text enemiesRemainingText;
     [SerializeField] private TMP_Text catnipText;
@@ -24,10 +23,20 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private float minimumEnemySpawnDistance;
     [Tooltip("The maximum distance from the player an enemy can spawn.")]
     [SerializeField] private float maximumEnemySpawnDistance;
-    [Tooltip("The base amount of enemies that will spawn in a wave.")]
-    [SerializeField] private float baseEnemySpawnCount;
-    [Tooltip("The ratio increase of enemy spawns per wave count.")]
-    [SerializeField] private float ratioEnemySpawnCount;
+    [Tooltip("The amount of seconds a wave lasts before going to the next.")]
+    [SerializeField] private float waveDuration;
+
+    [Serializable]
+    private class Wave {
+        [Tooltip("The prefbas of enemies being spawned this wave.")]
+        public GameObject[] enemyPrefabs;
+        [Tooltip("The minimum amount of enemies to have at once during this wave.")]
+        public int minimumCount;
+        [Tooltip("The amount of seconds in between enemy spawns this wave.")]
+        public float spawnInterval;
+    }
+
+    [SerializeField] private Wave[] waves;
 
     public int wave { get; private set; } = 0;
     [HideInInspector] public int enemyCount = 0;
@@ -91,36 +100,37 @@ public class GameManager : MonoBehaviour {
     }
 
     private IEnumerator SpawnEnemy() {
+        int waveIndex = wave;
+        if (waveIndex >= waves.Length) waveIndex = waves.Length - 1;
         wave++;
         waveText.text = $"Wave: {wave}";
 
-        for (int i = 0; i < baseEnemySpawnCount + (ratioEnemySpawnCount * wave); i++) {
-            while (this) {
-                Vector2 randomPoint = RandomPointInAnnulus(player.transform.position, minimumEnemySpawnDistance, maximumEnemySpawnDistance);
-                if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 0.1f, NavMesh.AllAreas)) {
-                    Instantiate(enemyPrefabs[Random.Range(0, enemyPrefabs.Length)], hit.position, Quaternion.identity);
-                    break;
+        int spawnIntervalAmount = (int)((1/waves[waveIndex].spawnInterval) * waveDuration);
+        for (int i = 0; i < spawnIntervalAmount; i++) {
+            if (enemyCount < waves[waveIndex].minimumCount) {
+                for (int j = 0; j < waves[waveIndex].enemyPrefabs.Length; j++) {
+                    while (this) {
+                        Vector2 randomPoint = RandomPointInAnnulus(player.transform.position, minimumEnemySpawnDistance, maximumEnemySpawnDistance);
+                        if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 0.1f, NavMesh.AllAreas)) {
+                            Instantiate(waves[waveIndex].enemyPrefabs[j], hit.position, Quaternion.identity);
+                            break;
+                        }
+
+                        yield return null;
+                    }
+                    enemyCount++;
+                    enemiesRemainingText.text = $"Enemies Remaining: {enemyCount}";
                 }
-
-                yield return null;
             }
-            enemyCount++;
-            enemiesRemainingText.text = $"Enemies Remaining: {enemyCount}";
+            yield return new WaitForSeconds(waves[waveIndex].spawnInterval);
         }
 
-        while (this) {
-            if (enemyCount == 0) {
-                StartCoroutine(SpawnEnemy());
-                break;
-            }
-
-            yield return null;
-        }
+        StartCoroutine(SpawnEnemy());
     }
 
     public Vector2 RandomPointInAnnulus(Vector2 origin, float minRadius, float maxRadius) {
-        var randomDirection = (Random.insideUnitCircle * origin).normalized;
-        var randomDistance = Random.Range(minRadius, maxRadius);
+        var randomDirection = (UnityEngine.Random.insideUnitCircle * origin).normalized;
+        var randomDistance = UnityEngine.Random.Range(minRadius, maxRadius);
         var point = origin + randomDirection * randomDistance;
         return point;
     }
