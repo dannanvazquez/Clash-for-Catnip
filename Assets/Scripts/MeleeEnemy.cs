@@ -9,8 +9,6 @@ public class MeleeEnemy : MonoBehaviour {
     [SerializeField] private int damageBase;
     [Tooltip("The amount of seconds before this enemy can hit again.")]
     [SerializeField] private int hitCooldown;
-    [Tooltip("The increase amount of speed this enemy will gain per wave.")]
-    [SerializeField] private float speedIncrease;
 
     private Transform playerTransform;
     private NavMeshAgent agent;

@@ -150,10 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0adf373dc27e38143a4aa77900e2b4f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageBase: 30
-  damageIncrease: 0
+  damageBase: 10
   hitCooldown: 1
-  speedIncrease: 0.02
 --- !u!114 &6585321474460097104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,8 +167,9 @@ MonoBehaviour:
   healthBarTransform: {fileID: 6585321474394014107}
   healthMask: {fileID: 6585321475832344311}
   healthText: {fileID: 0}
-  healthBase: 15
-  healthIncrease: 1
+  hitAudioSource: {fileID: 0}
+  hitClips: []
+  healthBase: 10
 --- !u!212 &6585321474460097107
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -233,7 +232,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 1
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120

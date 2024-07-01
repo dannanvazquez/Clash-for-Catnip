@@ -14790,8 +14790,8 @@ MonoBehaviour:
   pauseCanvas: {fileID: 3475791234989038548}
   joystickCanvas: {fileID: 1924747155}
   startTime: 1
-  minimumEnemySpawnDistance: 15
-  maximumEnemySpawnDistance: 20
+  minimumEnemySpawnDistance: 20
+  maximumEnemySpawnDistance: 25
   waveDuration: 60
   waves:
   - enemyPrefabs:
@@ -14895,7 +14895,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -14919,7 +14919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32461,7 +32461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9085213119130063486, guid: 838e71f8d6080564087f0dee9f4280d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9085213119130063486, guid: 838e71f8d6080564087f0dee9f4280d2, type: 3}
       propertyPath: m_LocalPosition.z
