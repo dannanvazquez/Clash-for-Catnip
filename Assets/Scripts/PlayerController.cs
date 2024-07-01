@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private Camera playerCamera;
     [SerializeField] private Joystick movementJoystick;
     [SerializeField] private Joystick shootingJoystick;
+    [SerializeField] private Weapon weapon;
 
     [Header("Settings")]
     [Tooltip("The speed of the player movement.")]
@@ -55,12 +56,19 @@ public class PlayerController : MonoBehaviour {
         if (isAutoAiming) {
             Vector3 closestEnemyPosition = GetClosestEnemyPosition();
             if (closestEnemyPosition != transform.position) {
-                aimDirection = (closestEnemyPosition - transform.position).normalized;
+                aimDirection = (closestEnemyPosition - weapon.transform.position).normalized;
             }
         } else {
             if (!GameManager.Instance.isMobile()) {
-                aimDirection = playerCamera.ScreenToWorldPoint(Input.mousePosition);
-                aimDirection -= rb.position;
+                Vector3 mousePosition = playerCamera.ScreenToWorldPoint(Input.mousePosition);
+                mousePosition.z = transform.position.z;
+                if (Vector3.Distance(transform.position, mousePosition) > 1f) {
+                    aimDirection = mousePosition;
+                    aimDirection -= new Vector2(weapon.transform.position.x, weapon.transform.position.y);
+                } else {
+                    aimDirection = mousePosition;
+                    aimDirection -= rb.position;
+                }
             } else {
                 aimDirection = shootingJoystick.Direction;
             }

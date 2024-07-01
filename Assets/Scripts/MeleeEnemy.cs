@@ -26,13 +26,16 @@ public class MeleeEnemy : MonoBehaviour {
     private void Update() {
         if (playerTransform == null) return;
 
-        Vector3 dir = playerTransform.position - transform.position;
-        rb.velocity = dir.normalized * moveSpeed;
-
         // Rotate enemy to follow player
+        Vector3 dir = playerTransform.position - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
+    }
+
+    private void FixedUpdate() {
+        Vector3 dir = playerTransform.position - transform.position;
+        rb.velocity = dir.normalized * moveSpeed;
     }
 
     private void OnCollisionStay2D(Collision2D collision) {

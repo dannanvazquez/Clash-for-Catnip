@@ -25,16 +25,12 @@ public class EnemyWeapon : MonoBehaviour {
 
     private bool canShoot = true;
 
-    [HideInInspector] public bool isInShootingState = false;
-
     private void Awake() {
         audioSource = GetComponent<AudioSource>();
     }
 
     public void Fire() {
         if (!canShoot) return;
-
-        isInShootingState = true;
 
         GameObject projectile = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         projectile.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);

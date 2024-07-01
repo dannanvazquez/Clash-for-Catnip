@@ -14,6 +14,9 @@ public class RangedEnemy : MonoBehaviour {
     private Transform playerTransform;
     private Rigidbody2D rb;
 
+    private enum State { Walking, Shooting  };
+    private State currentState = State.Walking;
+
     private void Awake() {
         playerTransform = GameManager.Instance.player.transform;
 
@@ -25,24 +28,29 @@ public class RangedEnemy : MonoBehaviour {
 
         // TODO: Check if enemy has a clear line of sight to hit. No obstacles right now so it doesn't matter at the moment.
         float distance = Vector3.Distance(transform.position, playerTransform.position);
-        if ((distance > enemyWeapon.shootRange && !enemyWeapon.isInShootingState) || (distance > enemyWeapon.deaggroRange && enemyWeapon.isInShootingState)) {
-            enemyWeapon.isInShootingState = false;
 
-            // Walk towards the player to get into shooting range.
-            Vector3 dir = playerTransform.position - transform.position;
-            rb.velocity = dir.normalized * moveSpeed;
-
-            // Rotate enemy to follow player
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        } else {
-            // Stop and shoot at the player since we are in range.
-            Vector3 dir = playerTransform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-            enemyWeapon.Fire();
+        switch (currentState) {
+            case State.Walking:
+                if (distance < enemyWeapon.shootRange) currentState = State.Shooting;
+                break;
+            case State.Shooting:
+                if (distance > enemyWeapon.deaggroRange) currentState = State.Walking;
+                break;
         }
 
+        Vector3 dir = enemyWeapon.transform.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        if (currentState == State.Shooting) {
+            enemyWeapon.Fire();
+        }
+    }
+
+    private void FixedUpdate() {
+        if (currentState == State.Walking && playerTransform != null) {
+            Vector3 dir = playerTransform.position - transform.position;
+            rb.velocity = dir.normalized * moveSpeed;
+        }
     }
 }

@@ -48775,6 +48775,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &217870284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9085213120005560179, guid: 838e71f8d6080564087f0dee9f4280d2, type: 3}
+  m_PrefabInstance: {fileID: 9085213118246227309}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2482000feffe544496273b4898980f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &342624802
 GameObject:
   m_ObjectHideFlags: 0
@@ -48913,6 +48924,10 @@ MonoBehaviour:
     - {fileID: 6585321474460097109, guid: 4f50c424b19264f45ba6bb6c86bdddfa, type: 3}
     minimumCount: 50
     spawnInterval: 0.5
+  - enemyPrefabs:
+    - {fileID: 6585321474460097109, guid: 528100403fdd8da4484a978de6e0272d, type: 3}
+    minimumCount: 60
+    spawnInterval: 1
   enemyCount: 0
 --- !u!1 &519420028
 GameObject:
@@ -146534,6 +146549,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 9085213119130063480, guid: 838e71f8d6080564087f0dee9f4280d2, type: 3}
+      propertyPath: weapon
+      value: 
+      objectReference: {fileID: 217870284}
     - target: {fileID: 9085213119130063480, guid: 838e71f8d6080564087f0dee9f4280d2, type: 3}
       propertyPath: playerCamera
       value: 
