@@ -674,7 +674,7 @@ MonoBehaviour:
   movementJoystick: {fileID: 0}
   shootingJoystick: {fileID: 0}
   moveSpeed: 6
-  autoAimRange: 6
+  autoAimRange: 10
 --- !u!114 &9085213119130063483
 MonoBehaviour:
   m_ObjectHideFlags: 0

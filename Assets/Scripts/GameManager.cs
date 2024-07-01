@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private float maximumEnemySpawnDistance;
     [Tooltip("The amount of seconds a wave lasts before going to the next.")]
     [SerializeField] private float waveDuration;
+    [Tooltip("The maximum amount of enemies to allow at once.")]
+    [SerializeField] private int maxEnemies;
 
     [Serializable]
     private class Wave {
@@ -103,13 +105,16 @@ public class GameManager : MonoBehaviour {
         if (waveIndex < waves.Length-1) waveIndex++;
 
         int spawnIntervalAmount = (int)((1/waves[waveIndex].spawnInterval) * waveDuration);
+        int enemyIndex = 0;
         for (int i = 0; i < spawnIntervalAmount; i++) {
-            if (enemyCount < waves[waveIndex].minimumCount) {
-                for (int j = 0; j < waves[waveIndex].enemyPrefabs.Length; j++) {
-                    Vector2 randomPoint = RandomPointInAnnulus(player.transform.position, minimumEnemySpawnDistance, maximumEnemySpawnDistance);
-                    Instantiate(waves[waveIndex].enemyPrefabs[j], randomPoint, Quaternion.identity);
-                    enemyCount++;
-                }
+            int amountToSpawn = waves[waveIndex].minimumCount - enemyCount;
+            if (amountToSpawn < 1) amountToSpawn = 1;
+            if (enemyCount + amountToSpawn > maxEnemies) amountToSpawn = maxEnemies - enemyCount;
+            for (int j = 0; j < amountToSpawn; j++) {
+                Vector2 randomPoint = RandomPointInAnnulus(player.transform.position, minimumEnemySpawnDistance, maximumEnemySpawnDistance);
+                Instantiate(waves[waveIndex].enemyPrefabs[enemyIndex % waves[waveIndex].enemyPrefabs.Length], randomPoint, Quaternion.identity);
+                enemyIndex++;
+                enemyCount++;
             }
             yield return new WaitForSeconds(waves[waveIndex].spawnInterval);
         }

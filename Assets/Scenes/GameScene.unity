@@ -48898,6 +48898,7 @@ MonoBehaviour:
   minimumEnemySpawnDistance: 20
   maximumEnemySpawnDistance: 20
   waveDuration: 60
+  maxEnemies: 300
   waves:
   - enemyPrefabs:
     - {fileID: 6585321474460097109, guid: 4f50c424b19264f45ba6bb6c86bdddfa, type: 3}
