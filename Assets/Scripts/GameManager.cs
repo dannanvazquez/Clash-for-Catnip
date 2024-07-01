@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public Vector2 RandomPointInAnnulus(Vector2 origin, float minRadius, float maxRadius) {
-        var randomDirection = (UnityEngine.Random.insideUnitCircle * origin).normalized;
+        var randomDirection = (UnityEngine.Random.insideUnitCircle).normalized;
         var randomDistance = UnityEngine.Random.Range(minRadius, maxRadius);
         var point = origin + randomDirection * randomDistance;
         return point;
