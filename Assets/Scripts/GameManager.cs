@@ -7,8 +7,7 @@ using UnityEngine.AI;
 public class GameManager : MonoBehaviour {
     [Header("References")]
     public GameObject player;
-    [SerializeField] private TMP_Text waveText;
-    [SerializeField] private TMP_Text enemiesRemainingText;
+    [SerializeField] private TMP_Text timeElapsedText;
     [SerializeField] private TMP_Text catnipText;
     [SerializeField] private GameObject catnipPrefab;
     [SerializeField] private GameOverCanvas gameOverCanvas;
@@ -38,7 +37,7 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] private Wave[] waves;
 
-    public int wave { get; private set; } = 0;
+    public int waveIndex { get; private set; } = -1;
     [HideInInspector] public int enemyCount = 0;
     public int catnip { get; private set; } = 0;
 
@@ -96,14 +95,12 @@ public class GameManager : MonoBehaviour {
     private IEnumerator StartGame() {
         yield return new WaitForSeconds(startTime);
 
+        StartCoroutine(TimeElapsedCoroutine());
         StartCoroutine(SpawnEnemy());
     }
 
     private IEnumerator SpawnEnemy() {
-        int waveIndex = wave;
-        if (waveIndex >= waves.Length) waveIndex = waves.Length - 1;
-        wave++;
-        waveText.text = $"Wave: {wave}";
+        if (waveIndex < waves.Length-1) waveIndex++;
 
         int spawnIntervalAmount = (int)((1/waves[waveIndex].spawnInterval) * waveDuration);
         for (int i = 0; i < spawnIntervalAmount; i++) {
@@ -119,13 +116,32 @@ public class GameManager : MonoBehaviour {
                         yield return null;
                     }
                     enemyCount++;
-                    enemiesRemainingText.text = $"Enemies Remaining: {enemyCount}";
                 }
             }
             yield return new WaitForSeconds(waves[waveIndex].spawnInterval);
         }
 
         StartCoroutine(SpawnEnemy());
+    }
+
+    private IEnumerator TimeElapsedCoroutine() {
+        int secondsElapsed = 0;
+
+        while (this) {
+            yield return new WaitForSeconds(1);
+
+            secondsElapsed++;
+            timeElapsedText.text = $"Time Elapsed: {GetTimeAsString(secondsElapsed)}";
+        }
+    }
+
+    private string GetTimeAsString(float seconds) {
+        TimeSpan timeSpan = TimeSpan.FromSeconds(seconds);
+        if (seconds >= 3600f) {
+            return timeSpan.ToString(@"hh\:mm\:ss");
+        } else {
+            return timeSpan.ToString(@"mm\:ss");
+        }
     }
 
     public Vector2 RandomPointInAnnulus(Vector2 origin, float minRadius, float maxRadius) {
@@ -137,7 +153,6 @@ public class GameManager : MonoBehaviour {
 
     public void EnemyKilled(Vector3 enemyDeathPosition) {
         enemyCount--;
-        enemiesRemainingText.text = $"Enemies Remaining: {enemyCount}";
         GameObject catnip = Instantiate(catnipPrefab, enemyDeathPosition, Quaternion.identity);
         catnip.GetComponent<BobbingEffect>().canBob = true;
     }
