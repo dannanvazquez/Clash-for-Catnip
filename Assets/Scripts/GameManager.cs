@@ -106,15 +106,8 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < spawnIntervalAmount; i++) {
             if (enemyCount < waves[waveIndex].minimumCount) {
                 for (int j = 0; j < waves[waveIndex].enemyPrefabs.Length; j++) {
-                    while (this) {
-                        Vector2 randomPoint = RandomPointInAnnulus(player.transform.position, minimumEnemySpawnDistance, maximumEnemySpawnDistance);
-                        if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 0.1f, NavMesh.AllAreas)) {
-                            Instantiate(waves[waveIndex].enemyPrefabs[j], hit.position, Quaternion.identity);
-                            break;
-                        }
-
-                        yield return null;
-                    }
+                    Vector2 randomPoint = RandomPointInAnnulus(player.transform.position, minimumEnemySpawnDistance, maximumEnemySpawnDistance);
+                    Instantiate(waves[waveIndex].enemyPrefabs[j], randomPoint, Quaternion.identity);
                     enemyCount++;
                 }
             }

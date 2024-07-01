@@ -113,8 +113,8 @@ GameObject:
   - component: {fileID: 2698852305444356320}
   - component: {fileID: 6585321474460097104}
   - component: {fileID: 6585321474460097107}
-  - component: {fileID: 6585321474460097119}
   - component: {fileID: 5043922426691434470}
+  - component: {fileID: 7560751936033925575}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Enemy
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyWeapon: {fileID: 5347961593032813797}
-  speedIncrease: 0.05
+  moveSpeed: 5
 --- !u!114 &6585321474460097104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,8 +168,9 @@ MonoBehaviour:
   healthBarTransform: {fileID: 6585321474394014107}
   healthMask: {fileID: 6585321475832344311}
   healthText: {fileID: 0}
+  hitAudioSource: {fileID: 0}
+  hitClips: []
   healthBase: 10
-  healthIncrease: 1
 --- !u!212 &6585321474460097107
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -222,28 +223,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!195 &6585321474460097119
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6585321474460097109}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3
-  m_Acceleration: 100
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!58 &5043922426691434470
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -260,6 +239,27 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!50 &7560751936033925575
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6585321474460097109}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &6585321475048888473
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +559,6 @@ MonoBehaviour:
   fireForce: 25
   fireRate: 0.5
   damageBase: 10
-  damageIncrease: 0
   shootRange: 4
   deaggroRange: 8
   isInShootingState: 0
