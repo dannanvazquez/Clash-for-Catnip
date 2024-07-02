@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour {
     [Header("References")]
     [SerializeField] private Transform healthBarTransform;
-    [SerializeField] private RectMask2D healthMask;
+    [SerializeField] private RectTransform[] healthRectTransforms;
     [SerializeField] private TMP_Text healthText;
     [SerializeField] private AudioSource hitAudioSource;
     [SerializeField] private AudioClip[] hitClips;
@@ -22,7 +22,9 @@ public class Health : MonoBehaviour {
     }
 
     private void Update() {
-        healthBarTransform.rotation = Quaternion.identity;
+        if (healthBarTransform) {
+            healthBarTransform.rotation = Quaternion.identity;
+        }
     }
 
     public void TakeDamage(int damage) {
@@ -49,9 +51,12 @@ public class Health : MonoBehaviour {
     }
 
     private void UpdateHealthBar() {
-        if (healthMask) {
-            float paddingZ = 960 - (960 * ((float)currentHealth / (float)healthBase));
-            healthMask.padding = new Vector4(0, 0, paddingZ, 0);
+        if (healthRectTransforms.Length > 0) {
+            foreach (RectTransform rect in healthRectTransforms) {
+                Vector3 updatedLocalScale = rect.localScale;
+                updatedLocalScale.x = (float)currentHealth / (float)healthBase;
+                rect.localScale = updatedLocalScale;
+            }
         }
 
         if (healthText) {

@@ -86,11 +86,11 @@ public class GameManager : MonoBehaviour {
         if (Time.timeScale == 0) {
             Time.timeScale = 1;
             pauseCanvas.enabled = false;
-            MusicManager.Instance.audioSource.UnPause();
+            if (MusicManager.Instance) MusicManager.Instance.audioSource.UnPause();
         } else {
             Time.timeScale = 0;
             pauseCanvas.enabled = true;
-            MusicManager.Instance.audioSource.Pause();
+            if (MusicManager.Instance) MusicManager.Instance.audioSource.Pause();
         }
     }
 
