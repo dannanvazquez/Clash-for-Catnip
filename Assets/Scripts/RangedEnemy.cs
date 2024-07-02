@@ -10,6 +10,8 @@ public class RangedEnemy : MonoBehaviour {
     [Header("Settings")]
     [Tooltip("The movement speed of this enemy.")]
     [SerializeField] private float moveSpeed;
+    [Tooltip("The amount of experience this enemy drops.")]
+    public float exp;
 
     private Transform playerTransform;
     private Rigidbody2D rb;

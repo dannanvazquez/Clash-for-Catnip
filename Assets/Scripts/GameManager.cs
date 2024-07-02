@@ -149,16 +149,17 @@ public class GameManager : MonoBehaviour {
         return point;
     }
 
-    public void EnemyKilled(Vector3 enemyDeathPosition) {
+    public void EnemyKilled(Vector3 enemyDeathPosition, float expAmount) {
         enemyCount--;
         GameObject catnip = Instantiate(catnipPrefab, enemyDeathPosition, Quaternion.identity);
         catnip.GetComponent<BobbingEffect>().canBob = true;
+        catnip.GetComponent<Catnip>().exp = expAmount;
     }
 
-    public void PickedUpCatnip(int healAmount) {
+    public void PickedUpCatnip(float expAmount) {
         catnip++;
         catnipText.text = $"Catnip: {catnip}";
-        player.GetComponent<Health>().Heal(healAmount);
+        player.GetComponent<ExperienceController>().GainEXP(expAmount);
         catnipAudioSource.Play();
     }
 

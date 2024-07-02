@@ -11,6 +11,8 @@ public class MeleeEnemy : MonoBehaviour {
     [SerializeField] private int hitCooldown;
     [Tooltip("The movement speed of this enemy.")]
     [SerializeField] private float moveSpeed;
+    [Tooltip("The amount of experience this enemy drops.")]
+    public float exp;
 
     private Transform playerTransform;
     private Rigidbody2D rb;

@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyWeapon: {fileID: 5347961593032813797}
   moveSpeed: 6
+  exp: 2
 --- !u!114 &6585321474460097104
 MonoBehaviour:
   m_ObjectHideFlags: 0

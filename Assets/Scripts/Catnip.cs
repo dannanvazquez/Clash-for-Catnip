@@ -1,13 +1,11 @@
 using UnityEngine;
 
 public class Catnip : MonoBehaviour {
-    [Header("Settings")]
-    [Tooltip("The amount of health picking this up will heal.")]
-    public int heal;
+    [HideInInspector] public float exp;
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Player")) {
-            GameManager.Instance.PickedUpCatnip(heal);
+            GameManager.Instance.PickedUpCatnip(exp);
             Destroy(gameObject);
         }
     }

@@ -51,6 +51,7 @@ MonoBehaviour:
   damageBase: 10
   hitCooldown: 1
   moveSpeed: 1
+  exp: 1
 --- !u!114 &6585321474460097104
 MonoBehaviour:
   m_ObjectHideFlags: 0

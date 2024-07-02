@@ -67,7 +67,13 @@ public class Health : MonoBehaviour {
     private void Death() {
         switch (gameObject.tag) {
             case "Enemy":
-                GameManager.Instance.EnemyKilled(transform.position);
+                float expAmount = 0;
+                if (TryGetComponent(out MeleeEnemy meleeEnemy)) {
+                    expAmount = meleeEnemy.exp;
+                } else if (TryGetComponent(out RangedEnemy rangedEnemy)) {
+                    expAmount = rangedEnemy.exp;
+                }
+                GameManager.Instance.EnemyKilled(transform.position, expAmount);
                 break;
             case "Player":
                 GameManager.Instance.GameOver();
